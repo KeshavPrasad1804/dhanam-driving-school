@@ -52,13 +52,43 @@
     });
   });
 
-  // --- Booking form ---
+  // --- Booking form → WhatsApp ---
+  const WHATSAPP_FALLBACK = "919876543210";
+
+  function getWhatsAppNumber() {
+    const link = document.querySelector(".booking__contacts a[href*='wa.me']");
+    const match = link?.href.match(/wa\.me\/(\d+)/);
+    return match ? match[1] : WHATSAPP_FALLBACK;
+  }
+
+  function getSelectLabel(select) {
+    if (!select || !select.value) return "—";
+    const option = select.options[select.selectedIndex];
+    return option.textContent.trim();
+  }
+
+  function buildWhatsAppMessage(fields) {
+    const lines = [
+      "New lesson request — Dhanam Driving School",
+      "",
+      "Name: " + fields.name,
+      "Phone: " + fields.phone,
+    ];
+    if (fields.email) lines.push("Email: " + fields.email);
+    lines.push("Course: " + fields.course);
+    lines.push("Area: " + fields.area);
+    return lines.join("\n");
+  }
+
   const form = document.querySelector(".booking__form");
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const name = form.querySelector("#name");
       const phone = form.querySelector("#phone");
+      const email = form.querySelector("#email");
+      const course = form.querySelector("#course");
+      const area = form.querySelector("#area");
       let valid = true;
 
       form.querySelectorAll(".form-field__error").forEach((el) => el.remove());
@@ -74,10 +104,28 @@
 
       if (!valid) return;
 
+      const message = buildWhatsAppMessage({
+        name: name.value.trim(),
+        phone: phone.value.trim(),
+        email: email?.value.trim() || "",
+        course: getSelectLabel(course),
+        area: getSelectLabel(area),
+      });
+
+      const waUrl =
+        "https://wa.me/" +
+        getWhatsAppNumber() +
+        "?text=" +
+        encodeURIComponent(message);
+
       const btn = form.querySelector('button[type="submit"]');
       const original = btn.textContent;
-      btn.textContent = "Request sent";
+      btn.textContent = "Opening WhatsApp…";
       btn.disabled = true;
+
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+
+      btn.textContent = "Request sent";
       btn.style.background = "linear-gradient(145deg, #1f7a6f, #0a3531)";
 
       setTimeout(() => {
