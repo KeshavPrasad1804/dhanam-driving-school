@@ -142,22 +142,59 @@ select {
   gap: var(--space-6);
 }
 
-.nav__brand {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.125rem;
-  letter-spacing: -0.02em;
+.logo-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
 }
 
-.nav__mark {
-  width: 0.65rem;
-  height: 0.65rem;
-  background: linear-gradient(135deg, var(--gold-bright), var(--teal));
-  border-radius: 2px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.logo__mark {
+  flex-shrink: 0;
+  width: 2.35rem;
+  height: 2.35rem;
+  filter: drop-shadow(0 4px 10px rgba(15, 79, 72, 0.28));
+  border-radius: 12px;
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  line-height: 1.05;
+}
+
+.logo__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.logo__tag {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.logo--footer .logo__mark {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+.logo--footer .logo__name {
+  font-size: 1.25rem;
 }
 
 .nav__menu {
@@ -865,11 +902,9 @@ select {
   gap: var(--space-6);
 }
 
-.footer__brand strong {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  display: block;
-  margin-bottom: var(--space-2);
+.footer__brand {
+  display: grid;
+  gap: var(--space-3);
 }
 
 .footer__brand p {
