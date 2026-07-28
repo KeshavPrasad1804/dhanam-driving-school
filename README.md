@@ -10,55 +10,31 @@ python3 -m http.server 8080
 
 Open http://localhost:8080
 
-## Deploy to Vercel (automatic on merge)
+## Deploy to Vercel
 
-Production deploys run via **GitHub Actions** when a pull request is merged into `main`. Opening or updating a PR triggers a **preview** deployment.
+**Live site:** https://dhanam-driving-school.vercel.app
 
-### One-time setup
+Production deploys run via **GitHub Actions** when code is pushed to `main` (including after a PR merge). Opening or updating a PR triggers a **preview** deployment.
 
-#### 1. Create a Vercel project
+### Finish GitHub Actions setup (one step left)
 
-**Option A — Vercel dashboard (recommended)**
+A Vercel project is already created. Add these **repository secrets** so workflows can deploy automatically:
 
-1. Go to [vercel.com/new](https://vercel.com/new) and import `KeshavPrasad1804/dhanam-driving-school`.
-2. Leave the framework preset as static / Other (no build command).
-3. **Disable** Vercel’s built-in “Deploy on push” Git integration if you only want GitHub Actions to deploy (Project → Settings → Git → disconnect, or turn off automatic deployments). Otherwise both Vercel Git hooks and Actions may deploy on each push.
-
-**Option B — Vercel CLI**
-
-```bash
-npx vercel@latest login
-npx vercel@latest link
-```
-
-This creates `.vercel/project.json` locally (do not commit this file).
-
-#### 2. Create a Vercel access token
-
-1. Open [vercel.com/account/tokens](https://vercel.com/account/tokens).
-2. Create a token with access to the team/account that owns the project.
-
-#### 3. Add GitHub repository secrets
-
-In GitHub: **Settings → Secrets and variables → Actions → New repository secret**
+GitHub → **Settings → Secrets and variables → Actions → New repository secret**
 
 | Secret | Value |
 |--------|--------|
-| `VERCEL_TOKEN` | Token from step 2 |
-| `VERCEL_ORG_ID` | `orgId` from `.vercel/project.json` or Vercel project settings |
-| `VERCEL_PROJECT_ID` | `projectId` from `.vercel/project.json` or Vercel project settings |
+| `VERCEL_TOKEN` | Your Vercel token ([account tokens](https://vercel.com/account/tokens)) — **do not commit this** |
+| `VERCEL_ORG_ID` | `team_4JSK3RUTgDOjUqq25GF4DG6e` |
+| `VERCEL_PROJECT_ID` | `prj_WZIYnzocWOsyNykUOeAvkMhxY9mu` |
 
-To read IDs from a linked project:
+After saving the secrets, re-run the failed workflow: **Actions → Vercel Production Deployment → Re-run all jobs**.
 
-```bash
-cat .vercel/project.json
-```
+If you shared a token in chat or a ticket, **revoke it and create a new one** before adding it as a secret.
 
-#### 4. Merge and verify
+### Alternative: Vercel Git integration
 
-1. Merge your PR into `main`.
-2. Open **Actions** in GitHub and confirm **Vercel Production Deployment** succeeds.
-3. Open the production URL in the Vercel dashboard (e.g. `https://dhanam-driving-school.vercel.app`).
+Instead of GitHub Actions, you can connect the repo in the [Vercel dashboard](https://vercel.com/keshavprasad10000-8223/dhanam-driving-school/settings/git) (requires linking GitHub under Vercel account settings). Vercel will deploy on every push to `main` without Actions secrets. If you use both, disable one to avoid double deploys.
 
 ### Workflows
 
