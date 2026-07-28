@@ -22,7 +22,18 @@ npx --yes serve /workspace -l 3000
 
 ### Lint / test
 
-There are no configured linters, test runners, or CI workflows. Manual verification is done by loading the site and exercising navigation, sections, and the booking form (client-side validation + success UI in `script.js`).
+There are no configured linters or unit tests. Manual verification is done by loading the site and exercising navigation, sections, and the booking form (client-side validation + success UI in `script.js`).
+
+### CI / deploy
+
+GitHub Actions deploys to Vercel:
+
+- **Preview:** `.github/workflows/vercel-preview.yml` on pull requests
+- **Production:** `.github/workflows/vercel-production.yml` on push to `main` (runs after a PR merge)
+
+Requires GitHub secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`. See `README.md` for one-time setup.
+
+Do not commit `.vercel/` (local `vercel link` output).
 
 ### External dependencies (runtime)
 
