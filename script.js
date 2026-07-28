@@ -53,7 +53,7 @@
   });
 
   // --- Booking form → WhatsApp ---
-  const WHATSAPP_FALLBACK = "919876543210";
+  const WHATSAPP_FALLBACK = "918248579098";
 
   function getWhatsAppNumber() {
     const link = document.querySelector(".booking__contacts a[href*='wa.me']");
