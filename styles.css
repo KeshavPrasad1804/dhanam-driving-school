@@ -128,7 +128,7 @@ body.nav-open {
   position: fixed;
   inset: 0 0 auto;
   z-index: 100;
-  padding: var(--space-4) 0;
+  padding: max(var(--space-4), env(safe-area-inset-top, 0px)) 0 var(--space-4);
   transition: background 0.35s var(--ease), backdrop-filter 0.35s var(--ease), padding 0.35s var(--ease);
 }
 
