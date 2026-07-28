@@ -43,4 +43,4 @@ Do not commit `.vercel/` (local `vercel link` output).
 
 ### Booking form behavior
 
-The booking form does not submit to a server. Valid submissions show a temporary success state on the submit button; invalid submissions show inline errors for name and email.
+The booking form opens WhatsApp with a pre-filled enquiry message (number from the `wa.me` link in `#contact`). No server submission.
