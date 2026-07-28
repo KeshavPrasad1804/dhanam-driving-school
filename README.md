@@ -16,21 +16,23 @@ Open http://localhost:8080
 
 Production deploys run via **GitHub Actions** when code is pushed to `main` (including after a PR merge). Opening or updating a PR triggers a **preview** deployment.
 
-### Finish GitHub Actions setup (one step left)
+### Finish GitHub Actions setup (one secret required)
 
-A Vercel project is already created. Add these **repository secrets** so workflows can deploy automatically:
+The Vercel org and project IDs are already set in the workflow files. You only need **one** repository secret:
 
-GitHub → **Settings → Secrets and variables → Actions → New repository secret**
+1. Open **https://github.com/KeshavPrasad1804/dhanam-driving-school/settings/secrets/actions**
+2. Click **New repository secret**
+3. Name: `VERCEL_TOKEN`
+4. Value: a Vercel token from [vercel.com/account/tokens](https://vercel.com/account/tokens) (create a new token; do not reuse one posted in chat)
 
-| Secret | Value |
-|--------|--------|
-| `VERCEL_TOKEN` | Your Vercel token ([account tokens](https://vercel.com/account/tokens)) — **do not commit this** |
-| `VERCEL_ORG_ID` | `team_4JSK3RUTgDOjUqq25GF4DG6e` |
-| `VERCEL_PROJECT_ID` | `prj_WZIYnzocWOsyNykUOeAvkMhxY9mu` |
+After saving, re-run the failed workflow: **Actions → Vercel Production Deployment → Re-run all jobs**.
 
-After saving the secrets, re-run the failed workflow: **Actions → Vercel Production Deployment → Re-run all jobs**.
+Reference IDs (already in workflows, no need to add as secrets):
 
-If you shared a token in chat or a ticket, **revoke it and create a new one** before adding it as a secret.
+| Setting | Value |
+|---------|--------|
+| Vercel team (org) | `team_4JSK3RUTgDOjUqq25GF4DG6e` |
+| Vercel project | `prj_WZIYnzocWOsyNykUOeAvkMhxY9mu` |
 
 ### Alternative: Vercel Git integration
 
